@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.parkingcontrolsystem.mapper.SystemMapper">
+    <insert id="entryNotice">
+        insert
+        into SYSTEM (PARKINGLOT_ID, LICENSE_PLATE)
+        values (#{parkingLot_id}, #{license_plate})
+    </insert>
+
+    <update id="updateMember_id">
+        update SYSTEM
+        set MEMBER_ID = #{member_id}
+        where LICENSE_PLATE = #{license_plate}
+    </update>
+
+    <update id="exitNotice">
+        update SYSTEM
+        set EXIT_TIME = sysdate
+        where LICENSE_PLATE = #{license_plate}
+    </update>
+
+    <select id="getSystem" resultType="com.project.parkingcontrolsystem.domain.system.System">
+        select *
+        from SYSTEM
+        where LICENSE_PLATE = #{license_plate}
+    </select>
+
+    <select id="getSystemByEmail" resultType="com.project.parkingcontrolsystem.domain.system.System">
+        select *
+        from SYSTEM
+        where MEMBER_ID = #{email}
+    </select>
+
+    <select id="getPLid" resultType="java.lang.Integer">
+        select PARKINGLOT_ID
+        from SYSTEM
+        where LICENSE_PLATE = #{license_plate}
+    </select>
+
+    <update id="setPrice">
+        update SYSTEM
+        set PRICE = #{price}
+        where LICENSE_PLATE = #{license_plate}
+    </update>
+</mapper>

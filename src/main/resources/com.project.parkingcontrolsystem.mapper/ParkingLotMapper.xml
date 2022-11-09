@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.parkingcontrolsystem.mapper.ParkingLotMapper">
+    <select id="getPriceRateInfo" resultType="com.project.parkingcontrolsystem.domain.parkinglot.form.ParkingLotFormMR">
+        select DEFAULT_MINUTES, DEFAULT_RATE, ADDITIONAL_MINUTES, ADDITIONAL_RATE
+        from PARKINGLOT
+        where ID = #{id}
+    </select>
+</mapper>
