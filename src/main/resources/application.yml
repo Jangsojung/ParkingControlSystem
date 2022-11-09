@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1522:xe
+    username: ParkingControlSystem
+    password: pcs123
+
+  mvc:
+    view:
+      prefix: /WEB-INF/view
+      suffix: .jsp
+
+server:
+  tomcat:
+    additional-tld-skip-patterns: "*.jar"
+
+mybatis:
+  mapper-locations: com.project.parkingcontrolsystem.mapper/*.xml
