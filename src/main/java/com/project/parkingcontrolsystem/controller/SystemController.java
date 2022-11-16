@@ -57,6 +57,7 @@ public class SystemController {
         SystemFormDtoS systemFormDtoS = makeDtoS(system);
 
         model.addAttribute("mySystem", systemFormDtoS);
+        model.addAttribute("plInfo", parkingLotFormMR);
 
         return "/main/index";
     }

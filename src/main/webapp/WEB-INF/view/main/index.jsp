@@ -65,17 +65,18 @@
                         </c:when>
                         <c:when test="${mySystem.exit_time == null}">
                             <ul>
-                                <li><h1 style="color:blue; font-weight: bold">FOR TEST</h1></li>
-                                <li><h3 style="color: black">${mySystem.parkingLot_id} 주차장 금액</h3></li>
+                                <li><h1 style="color:blue; font-weight: bold">결제 INFO</h1></li>
+                                <li><h3 style="color: black">${plInfo.name} 금액</h3></li>
                                 <li><i class="bi bi-check"></i> 기본 시간(분) / 기본 요금: ${plInfo.default_minutes} / ${plInfo.default_rate}</li>
                                 <li><i class="bi bi-check"></i> 추가 시간(분) / 추가 요금: ${plInfo.additional_minutes} / ${plInfo.additional_rate}</li>
+                                <li><h3 style="color: black">입차 시간</h3></li>
                                 <li><i class="bi bi-check"></i> 입차 시간: ${mySystem.entry_time}</li>
                             </ul>
                         </c:when>
                         <c:otherwise>
                             <ul>
                                 <li><h1 style="color:blue; font-weight: bold">결제 INFO</h1></li>
-                                <li><h3 style="color: black">${mySystem.parkingLot_id} 주차장 금액</h3></li>
+                                <li><h3 style="color: black">${plInfo.name} 금액</h3></li>
                                 <li><i class="bi bi-check"></i> 기본 시간: ${plInfo.default_minutes}분 / 기본 요금: ${plInfo.default_rate}원</li>
                                 <li><i class="bi bi-check"></i> 추가 시간: ${plInfo.additional_minutes}분 / 추가 요금: ${plInfo.additional_rate}원</li>
                                 <li><h3 style="color: black">입차, 출차 시간</h3></li>

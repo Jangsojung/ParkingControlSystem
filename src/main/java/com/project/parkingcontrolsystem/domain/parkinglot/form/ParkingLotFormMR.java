@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ParkingLotFormMR {
+    String name;
     int default_minutes;
     int default_rate;
     int additional_minutes;
