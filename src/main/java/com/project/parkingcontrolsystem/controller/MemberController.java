@@ -10,7 +10,6 @@ import com.project.parkingcontrolsystem.service.SystemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +47,7 @@ public class MemberController {
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
-                        HttpServletRequest request, Model model) {
+                        HttpServletRequest request) {
         Member authUser;
 
         try {
@@ -72,10 +71,11 @@ public class MemberController {
         if (system != null) {
             ParkingLotFormMR parkingLotFormMR = parkingLotService.getPriceRateInfo(system.getParkingLot_id());
             SystemFormDtoS systemFormDtoS = makeDtoS(system);
-            model.addAttribute("mySystem", systemFormDtoS);
-            model.addAttribute("plInfo", parkingLotFormMR);
 
-            return "/main/index";
+            request.getSession().setAttribute("mySystem", systemFormDtoS);
+            request.getSession().setAttribute("plInfo", parkingLotFormMR);
+
+            return "redirect:/";
         }
 
         return "redirect:/";

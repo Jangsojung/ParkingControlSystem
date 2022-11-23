@@ -8,10 +8,10 @@ import com.project.parkingcontrolsystem.service.SystemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 
 @Controller
@@ -24,7 +24,7 @@ public class SystemController {
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
 
     @GetMapping("/auth/entryNotice")
-    public String entryNotice(@RequestParam("parkingLot_id") int parkingLot_id, @RequestParam("license_plate") String license_plate, Model model) {
+    public String entryNotice(@RequestParam("parkingLot_id") int parkingLot_id, @RequestParam("license_plate") String license_plate, HttpServletRequest request) {
         systemService.entryNotice(parkingLot_id, license_plate);
         systemService.updateMember_id(license_plate);
 
@@ -33,14 +33,14 @@ public class SystemController {
 
         SystemFormDtoS systemFormDtoS = makeDtoS(system);
 
-        model.addAttribute("mySystem", systemFormDtoS);
-        model.addAttribute("plInfo", parkingLotFormMR);
+        request.getSession().setAttribute("mySystem", systemFormDtoS);
+        request.getSession().setAttribute("plInfo", parkingLotFormMR);
 
-        return "/main/index";
+        return "redirect:/";
     }
 
     @GetMapping("/auth/exitNotice")
-    public String exitNotice(@RequestParam("license_plate") String license_plate, Model model) {
+    public String exitNotice(@RequestParam("license_plate") String license_plate, HttpServletRequest request) {
         systemService.exitNotice(license_plate);
 
         System system = systemService.getSystem(license_plate);
@@ -56,10 +56,10 @@ public class SystemController {
 
         SystemFormDtoS systemFormDtoS = makeDtoS(system);
 
-        model.addAttribute("mySystem", systemFormDtoS);
-        model.addAttribute("plInfo", parkingLotFormMR);
+        request.getSession().setAttribute("mySystem", systemFormDtoS);
+        request.getSession().setAttribute("plInfo", parkingLotFormMR);
 
-        return "/main/index";
+        return "redirect:/";
     }
 
     private SystemFormDtoS makeDtoS(System system) {
